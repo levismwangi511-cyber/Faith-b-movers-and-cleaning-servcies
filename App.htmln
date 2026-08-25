@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Faith B Movers App</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b3d91">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',Arial}
+body{background:#eef2f7}
+.top{background:#0b3d91;color:white;padding:16px 16px 30px;border-radius:0 0 24px 24px}
+.card{background:white;border-radius:18px;padding:16px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.08);border:2px solid transparent}
+.card.sel{border-color:#ff6a00;transform:scale(1.02)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;margin-top:-20px}
+.input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
+.price{background:#ffd9b3;border:2px solid #ffb26e;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.btn{flex:1;padding:14px;border:none;border-radius:12px;color:white;font-weight:bold}
+.wa{background:#25D366}.call{background:#0b3d91}
+.mpesa{background:#b9e5d6;border-radius:12px;padding:12px;margin-top:12px}
+</style></head><body>
+<div class="top"><h2>🚚 Faith B Movers</h2><p>📞 0708784079 • Eldoret & Karatina</p></div>
+<div class="grid">
+<div class="card sel" onclick="pick(this,'House Moving',5000)">🏠<br><b>House Moving</b><br><small>Homes & Apartments</small></div>
+<div class="card" onclick="pick(this,'Office Moving',8000)">🏢<br><b>Office Moving</b><br><small>Offices</small></div>
+<div class="card" onclick="pick(this,'House Cleaning',3000)">🧹<br><b>House Cleaning</b><br><small>Deep Cleaning</small></div>
+<div class="card" onclick="pick(this,'Truck Hire',4000)">🚛<br><b>Truck Hire</b><br><small>Cargo & Transport</small></div>
+</div>
+<div style="background:white;margin:16px;border-radius:18px;padding:16px">
+<h3>Book Now 📅</h3>
+<input id="from" class="input" placeholder="From: e.g. Eldoret">
+<input id="to" class="input" placeholder="To: e.g. Nairobi">
+<div style="display:flex;gap:8px"><input id="date" type="date" class="input"><input id="time" type="time" class="input"></div>
+<select id="size" class="input" onchange="calc()"><option value="0">House Size</option><option value="1500">Bedsitter +1500</option><option value="3000">1 Bedroom +3000</option><option value="5000">2 Bedroom +5000</option><option value="8000">3 Bedroom +8000</option></select>
+<div class="price"><div><b>Price Calculator</b><br><small>Includes transport & labour</small></div><div><small>Estimated Total:</small><br><b style="color:#ff6a00;font-size:22px" id="total">KES 5,000</b></div></div>
+<div style="display:flex;gap:10px"><button class="btn wa" onclick="wa()">WhatsApp Checkout</button><button class="btn call" onclick="location.href='tel:+254708784079'">Call Now</button></div>
+<div class="mpesa"><b>M-Pesa Paybill</b><br>Paybill: <b>247247</b> Account: <b>0708784079</b><br><small>Use your phone number as account</small></div>
+<p style="text-align:center;margin-top:10px;font-size:12px;color:#666">24/7 Customer Support • Licensed & Insured</p>
+</div>
+<script>
+let base=5000,name='House Moving';
+function pick(el,n,p){document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');name=n;base=p;calc();}
+function calc(){let e=parseInt(document.getElementById('size').value)||0;let t=base+e;document.getElementById('total').innerText='KES '+t.toLocaleString();return t;}
+function wa(){let t=calc();let f=document.getElementById('from').value;let to=document.getElementById('to').value;let d=document.getElementById('date').value;let ti=document.getElementById('time').value;let msg=`Hello Faith B Movers!%0A*${name}*%0AFrom:${f}%0ATo:${to}%0ADate:${d} ${ti}%0AEstimate:KES ${t}%0APaybill 247247 Acc:0708784079`;window.open('https://wa.me/254708784079?text='+msg,'_blank');}
+</script></body></html>
